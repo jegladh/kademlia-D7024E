@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestRoutingTable(t *testing.T) { //glöm inte ändra ID lenght = 1
+func TestRoutingTable1(t *testing.T) { //glöm inte ändra ID lenght = 1
 
 
 	rt := NewRoutingTable(NewContact(NewKademliaID("00"), "localhost:8000")) //Bygg från här
@@ -16,14 +16,7 @@ func TestRoutingTable(t *testing.T) { //glöm inte ändra ID lenght = 1
 	rt.AddContact(NewContact(NewKademliaID("03"), "localhost:8002"))
 	rt.AddContact(NewContact(NewKademliaID("04"), "localhost:8002"))
 	rt.AddContact(NewContact(NewKademliaID("05"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("06"), "localhost:8002"))//test nodes
-	rt.AddContact(NewContact(NewKademliaID("07"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("08"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("09"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("10"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("11"), "localhost:8002"))
-
-
+	rt.AddContact(NewContact(NewKademliaID("05"), "localhost:8002"))//test nodes
 
 	contacts := rt.FindClosestContacts(NewKademliaID("05"), 20)		//Hitta närmaste till denna nod
 	for i := range contacts {
