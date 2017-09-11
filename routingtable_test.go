@@ -5,7 +5,32 @@ import (
 	"testing"
 )
 
-func TestRoutingTable(t *testing.T) { //glöm inte ändra ID lenght = 1
+func TestRoutingTable0(t *testing.T) {
+	rt := NewRoutingTable(NewContact(NewKademliaID("0000"), "localhost:8000"))
+
+	rt.AddContact(NewContact(NewKademliaID("0000"), "localhost:8001"))
+	rt.AddContact(NewContact(NewKademliaID("0001"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("0010"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("0011"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("0100"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("0101"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("0110"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("0111"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("1000"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("1001"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("1010"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("1011"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("1100"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("1101"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("1110"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("1111"), "localhost:8002"))
+	
+	bucket := rt.getBucketIndex(NewKademliaID("1111"))
+	fmt.Println(bucket)
+	
+}
+
+func TestRoutingTable1(t *testing.T) { //glöm inte ändra ID lenght = 1
 
 
 	rt := NewRoutingTable(NewContact(NewKademliaID("00"), "localhost:8000")) //Bygg från här
@@ -26,8 +51,10 @@ func TestRoutingTable(t *testing.T) { //glöm inte ändra ID lenght = 1
 
 
 	contacts := rt.FindClosestContacts(NewKademliaID("05"), 20)		//Hitta närmaste till denna nod
+	bucket := rt.getBucketIndex(NewKademliaID("11"))
 	for i := range contacts {
 		fmt.Println(contacts[i].String())
+		fmt.Println(bucket)
 	}
 
 
@@ -75,3 +102,4 @@ func TestRoutingTable2(t *testing.T) { //ID lenght = 2
 		fmt.Println(contacts[i].String())
 	}
 }
+
