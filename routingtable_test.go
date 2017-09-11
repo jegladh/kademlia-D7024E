@@ -5,6 +5,7 @@ import (
 	"testing"
 )
 
+//testing branch
 func TestRoutingTable0(t *testing.T) {
 	rt := NewRoutingTable(NewContact(NewKademliaID("0000"), "localhost:8000"))
 
