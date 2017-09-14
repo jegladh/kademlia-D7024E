@@ -5,61 +5,8 @@ import (
 	"testing"
 )
 
-func TestRoutingTable0(t *testing.T) {
-	rt := NewRoutingTable(NewContact(NewKademliaID("0000"), "localhost:8000"))
-
-	rt.AddContact(NewContact(NewKademliaID("0000"), "localhost:8001"))
-	rt.AddContact(NewContact(NewKademliaID("0001"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("0010"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("0011"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("0100"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("0101"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("0110"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("0111"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("1000"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("1001"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("1010"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("1011"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("1100"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("1101"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("1110"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("1111"), "localhost:8002"))
-	
-	bucket := rt.getBucketIndex(NewKademliaID("1111"))
-	fmt.Println(bucket)
-	
-}
-
-func TestRoutingTable1(t *testing.T) { //glöm inte ändra ID lenght = 1
-
-
-	rt := NewRoutingTable(NewContact(NewKademliaID("00"), "localhost:8000")) //Bygg från här
-
-	rt.AddContact(NewContact(NewKademliaID("00"), "localhost:8001"))
-	rt.AddContact(NewContact(NewKademliaID("01"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("02"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("03"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("04"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("05"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("06"), "localhost:8002"))//test nodes
-	rt.AddContact(NewContact(NewKademliaID("07"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("08"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("09"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("10"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("11"), "localhost:8002"))
-
-
-
-	contacts := rt.FindClosestContacts(NewKademliaID("05"), 20)		//Hitta närmaste till denna nod
-	bucket := rt.getBucketIndex(NewKademliaID("11"))
-	for i := range contacts {
-		fmt.Println(contacts[i].String())
-		fmt.Println(bucket)
-	}
-
-
-	//originalet
-	/*rt := NewRoutingTable(NewContact(NewKademliaID("FFFFFFFF00000000000000000000000000000000"), "localhost:8000"))
+func TestRoutingTable(t *testing.T) {
+	rt := NewRoutingTable(NewContact(NewKademliaID("FFFFFFFF00000000000000000000000000000000"), "localhost:8000"))
 
 	rt.AddContact(NewContact(NewKademliaID("FFFFFFFF00000000000000000000000000000000"), "localhost:8001"))
 	rt.AddContact(NewContact(NewKademliaID("1111111100000000000000000000000000000000"), "localhost:8002"))
@@ -71,33 +18,34 @@ func TestRoutingTable1(t *testing.T) { //glöm inte ändra ID lenght = 1
 	contacts := rt.FindClosestContacts(NewKademliaID("2111111400000000000000000000000000000000"), 20)
 	for i := range contacts {
 		fmt.Println(contacts[i].String())
-	}*/
-	
+	}
 }
 
-func TestRoutingTable2(t *testing.T) { //ID lenght = 2
-	
-	//binary
-	rt := NewRoutingTable(NewContact(NewKademliaID("0000"), "localhost:8000"))
+func TestRoutingTable2(t *testing.T) {
+	rt := NewRoutingTable(NewContact(NewKademliaID("00000000"), "localhost:8000"))
 
-	rt.AddContact(NewContact(NewKademliaID("0000"), "localhost:8001"))
-	rt.AddContact(NewContact(NewKademliaID("0001"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("0010"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("0011"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("0100"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("0101"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("0110"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("0111"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("1000"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("1001"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("1010"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("1011"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("1100"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("1101"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("1110"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("1111"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("11111000"), "localhost:8001"))
+	rt.AddContact(NewContact(NewKademliaID("11110000"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("11110000"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("11100000"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("11100000"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("11010000"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("11000000"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("10100000"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("10010000"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("10000000"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("01110000"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("01101000"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("01100000"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("01011000"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("01010000"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("01000000"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("00110000"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("00101000"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("00100000"), "localhost:8002"))
+	rt.AddContact(NewContact(NewKademliaID("00000000"), "localhost:8002"))
 
-	contacts := rt.FindClosestContacts(NewKademliaID("0101"), 20)
+	contacts := rt.FindClosestContacts(NewKademliaID("10110000"), 20)
 	for i := range contacts {
 		fmt.Println(contacts[i].String())
 	}

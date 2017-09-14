@@ -5,7 +5,7 @@ import (
 	"math/rand"
 )
 
-const IDLength = 1
+const IDLength = 3
 
 type KademliaID [IDLength]byte
 

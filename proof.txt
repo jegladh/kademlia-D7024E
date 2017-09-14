@@ -1,0 +1,7 @@
+k-bucket covering [2^i,2^i+1]
+index = i
+depth = h = 160-i (i smallest i if non-empty)
+y's bucket height in node x = i where x would insert y - i of least significant empty bucket
+every k-bucket of every node contains >= 1 contact if node exist in appropriate range.
+will always return closest node in h-log(k) steps.
+when closest node is found concurrency: alpha => k
