@@ -68,3 +68,5 @@ func TestRoutingTable2(t *testing.T) { //ID lenght = 2
 		fmt.Println(contacts[i].String())
 	}
 }
+
+
