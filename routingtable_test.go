@@ -12,7 +12,10 @@ import (
 
 
 func TestListen(t *testing.T){
+	nc := NewContact(NewKademliaID("0000"), "localhost:8000")
 	Listen("localhost", 8000)
+	network.SendPingMessage(nc)
+
 
 
 }
