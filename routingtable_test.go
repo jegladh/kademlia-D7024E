@@ -8,6 +8,15 @@ import (
 //testing freppe branch
 //test again
 //testing branch
+//go test -test.run TestListen
+
+
+func TestListen(t *testing.T){
+	Listen("localhost", 8000)
+
+
+}
+
 func TestRoutingTable0(t *testing.T) {
 	rt := NewRoutingTable(NewContact(NewKademliaID("0000"), "localhost:8000"))
 
