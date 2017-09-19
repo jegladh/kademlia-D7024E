@@ -70,5 +70,7 @@ func TestRoutingTable2(t *testing.T) { //ID lenght = 2
 }
 
 func TestListen(t *testing.T) {
+	nc := NewContact(NewKademliaID("0000"), "localhost:8000")
 	Listen("localhost", 8000)
+	network.SendPingMessage(nc)
 }
