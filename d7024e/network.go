@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strconv"
 	"os"
+	"github.com/golang/protobuf/proto"
 )
 
 type Network struct {
@@ -29,8 +30,8 @@ func Listen(ip string, port int) {
 	fmt.Println("Listening on " + ip + ":" + portstr)
 
 	buf := make([]byte, 1024)
-	for{
-		//n, conn, err := listener.ReadFromUdp(buf)
+	for
+{		//n, conn, err := listener.ReadFromUdp(buf)
 		fmt.Println("Received ", string(buf[0:n]), " from ", conn)
 		ErrorHandler(err)
 	}
@@ -38,9 +39,24 @@ func Listen(ip string, port int) {
 }
 
 func (network *Network) SendPingMessage(contact *Contact) {
-	// TODO
+	/*conn, err := net.DialUDP("udp", contact.Address, "localhost")
+	ErrorHandler(err)
+	n, err := conn.Write([]byte("Ping")) 
+	ErrorHandler(err)
+	fmt.Println("Sent " + Itoa(n) + " bytes")*/
 
-	// bucket.AddContact
+	data, err := proto.Marshal(test)
+	ErrorHandler(err)
+	/*if err != nil {
+		log.Fatal("marshaling error: ", err)
+	}*/
+
+	conn, err := net.DialUDP("udp", contact.Address, "localhost")
+	ErrorHandler(err)
+	defer conn.Close()
+
+	_, err := conn.Write([]byte("Ping"))
+	ErrorHandler(err) 
 }
 
 func (network *Network) SendFindContactMessage(contact *Contact) {
