@@ -12,7 +12,7 @@ var data = [][]string{
 }
 
 func main() {
-	file, err := os.Create( "temp.csv") /* Filename should be set to the sought after node, need to create this function*/
+	file, err := os.Create( "Temp.csv") /* Filename should be set to the sought after node, need to create this function*/
 	checkError2("Cannot create file", err)
 	defer file.Close()
 

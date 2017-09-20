@@ -55,7 +55,7 @@ func writeValuesTofile(datatowrite *ProtobufTest.TestMessage) {
 	items := datatowrite.GetMessageitems()
 	fmt.Println("Writing value to CSV file")
 	//Open file for writes, if the file does not exist then create it
-	file, err := os.OpenFile("CSVValues.csv", os.O_RDWR|os.O_APPEND|os.O_CREATE, 0666)
+	file, err := os.OpenFile("CSVV.csv", os.O_RDWR|os.O_APPEND|os.O_CREATE, 0666)
 	checkError(err)
 	//make sure the file gets closed once the function exists
 	defer file.Close()
