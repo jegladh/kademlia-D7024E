@@ -10,7 +10,7 @@ It is generated from these files:
 It has these top-level messages:
 	TestMessage
 */
-package src
+package d7024e
 
 import proto "protobuf/proto"
 import fmt "fmt"

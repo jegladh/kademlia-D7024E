@@ -21,8 +21,10 @@ func main() {
 		}
 	}()
 	//Listen to the TCP port
-	listener, err := net.Listen("tcp", "127.0.0.1:2110")
+	listener, err := net.ListenPacket("udp", "127.0.0.1:2110")
 	checkError(err)
+	defer listener.Close()
+
 	for {
 		if conn, err := listener.Accept(); err == nil {
 			//If err is nil then that means that data is available for us so we take up this data and pass it to a new goroutine
@@ -55,7 +57,7 @@ func writeValuesTofile(datatowrite *ProtobufTest.TestMessage) {
 	items := datatowrite.GetMessageitems()
 	fmt.Println("Writing value to CSV file")
 	//Open file for writes, if the file does not exist then create it
-	file, err := os.OpenFile("CSVValues.csv", os.O_RDWR|os.O_APPEND|os.O_CREATE, 0666)
+	file, err := os.OpenFile("CSVV.csv", os.O_RDWR|os.O_APPEND|os.O_CREATE, 0666)
 	checkError(err)
 	//make sure the file gets closed once the function exists
 	defer file.Close()

@@ -67,7 +67,7 @@ func retrieveDataFromFile(fname *string) ([]byte, error) {
 	return proto.Marshal(ProtoMessage)
 }
 func sendDataToDest(data []byte, dst *string) {
-	conn, err := net.Dial("tcp", *dst)
+	conn, err := net.Dial("udp", *dst)
 	checkError(err)
 	n, err := conn.Write(data)
 	checkError(err)
