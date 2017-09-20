@@ -5,6 +5,10 @@ import (
 	"testing"
 )
 
+/*func TestListen(t *testing.T) {
+	Listen("localhost", 8000)
+}*/
+
 func TestRoutingTable(t *testing.T) {
 	rt := NewRoutingTable(NewContact(NewKademliaID("FFFFFFFF00000000000000000000000000000000"), "localhost:8000"))
 
@@ -50,4 +54,3 @@ func TestRoutingTable2(t *testing.T) {
 		fmt.Println(contacts[i].String())
 	}
 }
-

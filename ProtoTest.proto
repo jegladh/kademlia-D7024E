@@ -1,0 +1,12 @@
+package ProtobufTest;
+
+message TestMessage {
+    repeated MsgItem messageitems = 1;
+
+    message MsgItem {
+        required int32 nodeId = 1;
+        optional string nodeAddress = 2;
+        optional int32 nodeDistance = 3;
+        optional int32 nodeBucket = 4;
+    }
+}
