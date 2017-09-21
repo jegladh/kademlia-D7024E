@@ -2,6 +2,7 @@ package d7024e
 
 import (
 	"container/list"
+	"fmt"
 )
 
 type bucket struct {
@@ -12,6 +13,15 @@ func newBucket() *bucket {
 	bucket := &bucket{}
 	bucket.list = list.New()
 	return bucket
+}
+
+func (bucket *bucket) String() string {
+	var res string
+	for e := bucket.list.Front(); e != nil; e = e.Next() {
+		nodeID := e.Value.(Contact).ID
+		res += fmt.Sprint(nodeID)
+	}
+	return res
 }
 
 func (bucket *bucket) AddContact(contact Contact) {

@@ -11,11 +11,12 @@ import (
 //testing branch
 //go test -test.run TestListen
 
-func TestListen(t *testing.T) {
+//func TestListen(t *testing.T) {
 
-	Listen("localhost", 8000)
+//Listen("localhost", 8000)
+//Ping()
 
-}
+//}
 
 func TestRoutingTable0(t *testing.T) {
 	rt := NewRoutingTable(NewContact(NewKademliaID("0000"), "localhost:8000"))
@@ -37,7 +38,7 @@ func TestRoutingTable0(t *testing.T) {
 	rt.AddContact(NewContact(NewKademliaID("1110"), "localhost:8002"))
 	rt.AddContact(NewContact(NewKademliaID("1111"), "localhost:8002"))
 
-	bucket := rt.getBucketIndex(NewKademliaID("1111"))
+	bucket := rt.GetBucketIndex(NewKademliaID("1111"))
 	fmt.Println(bucket)
 
 }
@@ -60,7 +61,7 @@ func TestRoutingTable1(t *testing.T) { //glöm inte ändra ID lenght = 1
 	rt.AddContact(NewContact(NewKademliaID("11"), "localhost:8002"))
 
 	contacts := rt.FindClosestContacts(NewKademliaID("05"), 20) //Hitta närmaste till denna nod
-	bucket := rt.getBucketIndex(NewKademliaID("11"))
+	bucket := rt.GetBucketIndex(NewKademliaID("11"))
 	for i := range contacts {
 		fmt.Println(contacts[i].String())
 		fmt.Println(bucket)
