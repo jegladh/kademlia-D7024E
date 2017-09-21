@@ -1,7 +1,7 @@
 package d7024e
 
 import (
-	"fmt"
+	//"fmt"
 	//"net"
 	"github.com/golang/protobuf/proto"
 	"github.com/kademlia-D7024E/protobuf"
@@ -18,11 +18,11 @@ func sendProtoMessage (lable string) *protobuf.KademliaMessage {
 	}
 	return message
 }
-
+/*
 func protoMessageHandler(data []byte, me Contact) {
 	message := &protobuf.KademliaMessage{}
 	err := proto.Unmarshal(data, message)
 	ErrorHandler(err)
 	fmt.Println("\n", message)
 
-}
+}*/

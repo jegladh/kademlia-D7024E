@@ -3,10 +3,9 @@ package d7024e
 import (
 	"net"
 	"fmt"
-	//"strconv"
+	"strconv"
 	"os"
 	"github.com/golang/protobuf/proto"
-	//"log"
 )
 
 type Network struct {
@@ -26,23 +25,20 @@ func ErrorHandler(err error){
 	}
 }
 
-func Listen(me Contact) {
-	// convert port to string
-	//portstr := strconv.Itoa(port)
-	serveraddr, err := net.ResolveUDPAddr("udp", me.Address)
+func Listen(ip string, port int) {
+	portstr := strconv.Itoa(port)
+	serveraddr, err := net.ResolveUDPAddr("udp", ip + ":" + portstr)
 	ErrorHandler(err)
 
-	// Listening at port
 	listener, err := net.ListenUDP("udp", serveraddr)
 	ErrorHandler(err)
 
 	defer listener.Close()
-	//fmt.Println("Listening on " + ip + ":" + portstr)
+	fmt.Println("Listening on " + ip + ":" + portstr)
 
 	buf := make([]byte, 1024)
-	for{		
-		_, _, err := listener.ReadFromUDP(buf)
-		go protoMessageHandler(buf, me)
+	for
+{		_, conn, err := listener.ReadFromUDP(buf)
 		//fmt.Println("Received ", string(buf[0:n]), " from ", conn)
 		ErrorHandler(err)
 	}
@@ -50,9 +46,7 @@ func Listen(me Contact) {
 }
 
 func (network *Network) SendPingMessage(contact *Contact) {
-	// protomessage
 	message := sendProtoMessage("ping")
-	//Marshall proto message
 	data, err := proto.Marshal(message)
 	ErrorHandler(err)
 
