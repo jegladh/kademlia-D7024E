@@ -3,9 +3,21 @@ package d7024e
 import (
 	"fmt"
 	"testing"
+	//"github.com/tatsushid/go-fastping"
 )
 
+//testing freppe branch
+//test again
 //testing branch
+//go test -test.run TestListen
+
+//func TestListen(t *testing.T) {
+
+//Listen("localhost", 8000)
+//Ping()
+
+//}
+
 func TestRoutingTable0(t *testing.T) {
 	rt := NewRoutingTable(NewContact(NewKademliaID("0000"), "localhost:8000"))
 
@@ -25,14 +37,13 @@ func TestRoutingTable0(t *testing.T) {
 	rt.AddContact(NewContact(NewKademliaID("1101"), "localhost:8002"))
 	rt.AddContact(NewContact(NewKademliaID("1110"), "localhost:8002"))
 	rt.AddContact(NewContact(NewKademliaID("1111"), "localhost:8002"))
-	
-	bucket := rt.getBucketIndex(NewKademliaID("1111"))
+
+	bucket := rt.GetBucketIndex(NewKademliaID("1111"))
 	fmt.Println(bucket)
-	
+
 }
 
 func TestRoutingTable1(t *testing.T) { //glöm inte ändra ID lenght = 1
-
 
 	rt := NewRoutingTable(NewContact(NewKademliaID("00"), "localhost:8000")) //Bygg från här
 
@@ -42,22 +53,19 @@ func TestRoutingTable1(t *testing.T) { //glöm inte ändra ID lenght = 1
 	rt.AddContact(NewContact(NewKademliaID("03"), "localhost:8002"))
 	rt.AddContact(NewContact(NewKademliaID("04"), "localhost:8002"))
 	rt.AddContact(NewContact(NewKademliaID("05"), "localhost:8002"))
-	rt.AddContact(NewContact(NewKademliaID("06"), "localhost:8002"))//test nodes
+	rt.AddContact(NewContact(NewKademliaID("06"), "localhost:8002")) //test nodes
 	rt.AddContact(NewContact(NewKademliaID("07"), "localhost:8002"))
 	rt.AddContact(NewContact(NewKademliaID("08"), "localhost:8002"))
 	rt.AddContact(NewContact(NewKademliaID("09"), "localhost:8002"))
 	rt.AddContact(NewContact(NewKademliaID("10"), "localhost:8002"))
 	rt.AddContact(NewContact(NewKademliaID("11"), "localhost:8002"))
 
-
-
-	contacts := rt.FindClosestContacts(NewKademliaID("05"), 20)		//Hitta närmaste till denna nod
-	bucket := rt.getBucketIndex(NewKademliaID("11"))
+	contacts := rt.FindClosestContacts(NewKademliaID("05"), 20) //Hitta närmaste till denna nod
+	bucket := rt.GetBucketIndex(NewKademliaID("11"))
 	for i := range contacts {
 		fmt.Println(contacts[i].String())
 		fmt.Println(bucket)
 	}
-
 
 	//originalet
 	/*rt := NewRoutingTable(NewContact(NewKademliaID("FFFFFFFF00000000000000000000000000000000"), "localhost:8000"))
@@ -73,11 +81,11 @@ func TestRoutingTable1(t *testing.T) { //glöm inte ändra ID lenght = 1
 	for i := range contacts {
 		fmt.Println(contacts[i].String())
 	}*/
-	
+
 }
 
 func TestRoutingTable2(t *testing.T) { //ID lenght = 2
-	
+
 	//binary
 	rt := NewRoutingTable(NewContact(NewKademliaID("0000"), "localhost:8000"))
 
@@ -103,4 +111,3 @@ func TestRoutingTable2(t *testing.T) { //ID lenght = 2
 		fmt.Println(contacts[i].String())
 	}
 }
-
