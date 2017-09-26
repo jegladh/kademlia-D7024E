@@ -102,5 +102,5 @@ func (network *Network) SendFindDataMessage(hash string) {
 func (network *Network) SendStoreMessage(data []byte) {
 	// TODO
 	//if success
-	//kademlia.Store()
+	//kademlia.Store(data)
 }

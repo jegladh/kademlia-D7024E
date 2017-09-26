@@ -14,12 +14,16 @@ var port int
 
 func main() {
 
-	port := 6969
+	port := 8000
 	portstr := strconv.Itoa(port)
 	//kademlia.Listen("130.240.109.93", port)
 	//kademlia.Ping()
 	randomID := kademlia.NewRandomKademliaID()
-	newRT := kademlia.NewRoutingTable(kademlia.NewContact(randomID, "localhost:"+portstr))
+	contact := kademlia.NewContact(randomID, "localhost:"+portstr)
+	newRT := kademlia.NewRoutingTable(contact)
+	newKademlia := kademlia.NewKademlia(&contact)
+	testID := kademlia.NewKademliaID("0f")
+	testContact := kademlia.NewContact(testID, "localhost:"+portstr)
 
 	//contact := kademlia.NewContact(randomID, "localhost:"+portstr)
 
@@ -29,11 +33,12 @@ func main() {
 		newC := kademlia.NewContact(randomID, "localhost:"+portstr)
 		fmt.Println(newC)
 		newRT.AddContact(newC)
-
 		port++
 
 	}
+	newKademlia.LookupContact(&testContact)
 	fmt.Println(newRT.GetBucketIndex(kademlia.NewKademliaID("0f")))
 	fmt.Println(newRT.Buckets[2])
+	fmt.Println(newKademlia)
 
 }
