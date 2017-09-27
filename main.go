@@ -22,8 +22,9 @@ func main() {
 	contact := kademlia.NewContact(randomID, "localhost:"+portstr)
 	newRT := kademlia.NewRoutingTable(contact)
 	newKademlia := kademlia.NewKademlia(&contact)
-	testID := kademlia.NewKademliaID("0f")
-	testContact := kademlia.NewContact(testID, "localhost:"+portstr)
+
+	//testID := kademlia.NewKademliaID("0f")
+	//testContact := kademlia.NewContact(randomID, "localhost:"+portstr)
 
 	//contact := kademlia.NewContact(randomID, "localhost:"+portstr)
 
@@ -36,7 +37,7 @@ func main() {
 		port++
 
 	}
-	newKademlia.LookupContact(&testContact)
+	newKademlia.LookupContact(&contact)
 	fmt.Println(newRT.GetBucketIndex(kademlia.NewKademliaID("0f")))
 	fmt.Println(newRT.Buckets[2])
 	fmt.Println(newKademlia)

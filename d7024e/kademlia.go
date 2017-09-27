@@ -5,11 +5,16 @@ import (
 	"sync"
 )
 
+//number of "threads"
 const alpha = 3
+
+//maximum amount of lookups
+const k = 20
 
 //http://blog.notdot.net/tag/kademlia struct and newkademlia found online
 type Kademlia struct {
-	RT *RoutingTable
+	RT  *RoutingTable
+	Net *Network
 }
 
 func NewKademlia(me *Contact) *Kademlia {
@@ -17,22 +22,34 @@ func NewKademlia(me *Contact) *Kademlia {
 	kademlia.RT = NewRoutingTable(*me)
 	return kademlia
 }
-func (kademlia *Kademlia) LookupContactThreads(target *Contact, tempContacts []*Kademlia) {
-	fmt.Println("Hello world")
+
+var neet neetwork = &Network{}
+
+func (kademlia *Kademlia) LookupContactThreads(target *Contact, closestContacts *[]Contact, wg *sync.WaitGroup) {
+	fmt.Println(closestContacts)
+	defer wg.Done()
+	for i := 0; i < 7; i++ {
+		c := (*closestContacts)[0]
+		*closestContacts = (*closestContacts)[1:]
+		neet.SendFindContactMessage(target, &c)
+
+	}
 }
 
 func (kademlia *Kademlia) LookupContact(target *Contact) *Contact {
 	closestContacts := kademlia.RT.FindClosestContacts(target.ID, alpha)
+	//fmt.Println(closestContacts)
 	for i, foundContact := range closestContacts {
+		fmt.Println(closestContacts)
 		if foundContact.ID == target.ID {
 			return &closestContacts[i]
 		}
 	}
 	var wg sync.WaitGroup
-	tempContacts := make([]*Kademlia, alpha)
-	wg.Add(alpha)
-	for i := 0; i < alpha; i++ {
-		go kademlia.LookupContactThreads(target, tempContacts)
+
+	wg.Add(1)
+	for i := 0; i < 1; i++ {
+		go kademlia.LookupContactThreads(target, &closestContacts, &wg)
 	}
 	wg.Wait()
 

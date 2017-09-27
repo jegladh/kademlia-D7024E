@@ -14,6 +14,11 @@ type Network struct {
 	//source string
 	//port   int
 }
+type neetwork interface {
+	SendFindContactMessage(contact *Contact, dest *Contact)
+	//LookupContact()
+	//LookupContactThreads()
+}
 
 func ErrorHandler(err error) {
 	if err != nil {
@@ -73,6 +78,10 @@ func Ping() {
 	Address  string
 	distance *KademliaID
 }*/
+// var neet neetwork = Network{}
+// neet.SendFindContactMessage()
+//
+// func (mock *Mocknetwokerykj) Sendping
 
 func (network *Network) SendPingMessage(contact *Contact) {
 	// TODO
@@ -87,7 +96,7 @@ func (network *Network) SendPingMessage(contact *Contact) {
 	//bucket.AddContact
 }
 
-func (network *Network) SendFindContactMessage(contact *Contact) {
+func (network *Network) SendFindContactMessage(contact *Contact, dest *Contact) {
 	// TODO
 	//if success
 	//kademlia.LookupContact()
