@@ -23,8 +23,8 @@ func (contact *Contact) Less(otherContact *Contact) bool {
 	return contact.distance.Less(otherContact.distance)
 }
 
-func (contact *Contact) String() string {
-	return fmt.Sprintf(`contact("%s", "%s")`, contact.ID, contact.Address)
+func (contact Contact) String() string {
+	return fmt.Sprintf(`contact("%s", "%s","%s")`, contact.ID, contact.Address, contact.distance)
 }
 
 type ContactCandidates struct {

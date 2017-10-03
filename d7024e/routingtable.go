@@ -1,5 +1,7 @@
 package d7024e
 
+import "fmt"
+
 const bucketSize = 20
 
 type RoutingTable struct {
@@ -17,6 +19,7 @@ func NewRoutingTable(me Contact) *RoutingTable {
 }
 
 func (routingTable *RoutingTable) AddContact(contact Contact) {
+	//fmt.Println("addcontact")
 	bucketIndex := routingTable.GetBucketIndex(contact.ID)
 	bucket := routingTable.Buckets[bucketIndex]
 	bucket.AddContact(contact)
@@ -60,4 +63,12 @@ func (routingTable *RoutingTable) GetBucketIndex(id *KademliaID) int {
 	}
 
 	return IDLength*8 - 1
+}
+
+func (rt *RoutingTable) String() string {
+	var ret string
+	for i := 0; i < len(rt.Buckets); i++ {
+		ret += fmt.Sprint(rt.Buckets[i])
+	}
+	return ret
 }

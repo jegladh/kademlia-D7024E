@@ -14,8 +14,10 @@ type Network struct {
 	//source string
 	//port   int
 }
+type MockNetwork struct {
+}
 type neetwork interface {
-	SendFindContactMessage(contact *Contact, dest *Contact)
+	SendFindContactMessage(contact *Contact, dest *Contact) []Contact
 	//LookupContact()
 	//LookupContactThreads()
 }
@@ -94,6 +96,16 @@ func (network *Network) SendPingMessage(contact *Contact) {
 	//should update buckets?
 
 	//bucket.AddContact
+}
+func (network *MockNetwork) SendFindContactMessage(contact *Contact, dest *Contact) []Contact {
+	var a []Contact
+
+	for i := 0; i < 5; i++ {
+		newcontact := NewContact(NewRandomKademliaID(), "localhost")
+		newcontact.CalcDistance(contact.ID)
+		a = append(a, newcontact)
+	}
+	return a
 }
 
 func (network *Network) SendFindContactMessage(contact *Contact, dest *Contact) {

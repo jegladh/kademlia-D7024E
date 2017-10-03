@@ -19,7 +19,7 @@ func (bucket *bucket) String() string {
 	var res string
 	for e := bucket.list.Front(); e != nil; e = e.Next() {
 		nodeID := e.Value.(Contact).ID
-		res += fmt.Sprint(nodeID)
+		res += fmt.Sprintf("%v\n", nodeID)
 	}
 	return res
 }
@@ -58,3 +58,12 @@ func (bucket *bucket) GetContactAndCalcDistance(target *KademliaID) []Contact {
 func (bucket *bucket) Len() int {
 	return bucket.list.Len()
 }
+
+/*func (bucket *bucket) String() string {
+	var ret string = "-- Buck --\n"
+	for elt := bucket.list.Front(); elt != nil; elt = elt.Next() {
+		contact := elt.Value.(Contact)
+		ret += fmt.Sprintln(contact)
+	}
+	return ret
+}*/

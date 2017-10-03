@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	kademlia "kademlia-D7024e/d7024e"
 	"strconv"
 	/*"net"
@@ -21,7 +20,7 @@ func main() {
 	randomID := kademlia.NewRandomKademliaID()
 	contact := kademlia.NewContact(randomID, "localhost:"+portstr)
 	newRT := kademlia.NewRoutingTable(contact)
-	newKademlia := kademlia.NewKademlia(&contact)
+	newKademlia := kademlia.NewKademlia(&contact, newRT)
 
 	//testID := kademlia.NewKademliaID("0f")
 	//testContact := kademlia.NewContact(randomID, "localhost:"+portstr)
@@ -32,14 +31,15 @@ func main() {
 		portstr := strconv.Itoa(port)
 		randomID := kademlia.NewRandomKademliaID()
 		newC := kademlia.NewContact(randomID, "localhost:"+portstr)
-		fmt.Println(newC)
+		//fmt.Println(newC)
 		newRT.AddContact(newC)
 		port++
 
 	}
+
 	newKademlia.LookupContact(&contact)
-	fmt.Println(newRT.GetBucketIndex(kademlia.NewKademliaID("0f")))
-	fmt.Println(newRT.Buckets[2])
-	fmt.Println(newKademlia)
+	//fmt.Println(newRT.GetBucketIndex(kademlia.NewKademliaID("0f")))
+	//fmt.Println(newRT.Buckets[2])
+	//fmt.Println(newKademlia)
 
 }
