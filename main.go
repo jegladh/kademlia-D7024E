@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	kademlia "kademlia-D7024e/d7024e"
 	"strconv"
 	/*"net"
@@ -36,8 +37,9 @@ func main() {
 		port++
 
 	}
-
-	newKademlia.LookupContact(&contact)
+	newKademlia.LookupData(&contact)
+	//newKademlia.LookupContact(&contact)
+	fmt.Println(&contact)
 	//fmt.Println(newRT.GetBucketIndex(kademlia.NewKademliaID("0f")))
 	//fmt.Println(newRT.Buckets[2])
 	//fmt.Println(newKademlia)

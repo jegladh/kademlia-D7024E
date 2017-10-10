@@ -18,6 +18,8 @@ type MockNetwork struct {
 }
 type neetwork interface {
 	SendFindContactMessage(contact *Contact, dest *Contact) []Contact
+	SendFindDataMessage(hash string, contact *Contact) (string, Contact)
+	SendStoreMessage(data []byte)
 	//LookupContact()
 	//LookupContactThreads()
 }
@@ -99,7 +101,7 @@ func (network *Network) SendPingMessage(contact *Contact) {
 }
 func (network *MockNetwork) SendFindContactMessage(contact *Contact, dest *Contact) []Contact {
 	var a []Contact
-
+	fmt.Println("I am sending ContatcMsg now")
 	for i := 0; i < 5; i++ {
 		newcontact := NewContact(NewRandomKademliaID(), "localhost")
 		newcontact.CalcDistance(contact.ID)
@@ -113,11 +115,24 @@ func (network *Network) SendFindContactMessage(contact *Contact, dest *Contact) 
 	//if success
 	//kademlia.LookupContact()
 }
+func (network *MockNetwork) SendFindDataMessage(hash string, contact *Contact) (string, Contact) {
+	var s string
+	fmt.Println(" I am sending DataMsg now")
+	for i := 0; i < 5; i++ {
+		newdata := NewContact(NewRandomKademliaID(), "localhost")
+		s = newdata.ID.String()
+	}
+	return s, NewContact(NewRandomKademliaID(), "localhost")
+
+}
 
 func (network *Network) SendFindDataMessage(hash string) {
 	// TODO
 	//if success
 	//kademlia.LookupData()
+}
+func (network *MockNetwork) SendStoreMessage(data []byte) {
+	//TODO
 }
 
 func (network *Network) SendStoreMessage(data []byte) {
