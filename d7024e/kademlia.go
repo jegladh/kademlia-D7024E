@@ -91,7 +91,7 @@ func (kademlia *Kademlia) LookupContact(target *Contact) *Contact {
 	return nil
 }
 
-func (kademlia *Kademlia) LookupDataThreads(hash string, closestContacts *Contacts, wg *sync.WaitGroup, mutex *sync.Mutex) {
+func (kademlia *Kademlia) LookupDataThreads(hash string, closestContacts *Contacts, wg *sync.WaitGroup, mutex *sync.Mutex, result *[]byte) {
 	defer wg.Done()
 	for i := 0; i < k; i++ {
 		if len(*closestContacts) == 0 {
@@ -100,45 +100,43 @@ func (kademlia *Kademlia) LookupDataThreads(hash string, closestContacts *Contac
 		mutex.Lock()
 		c := (*closestContacts)[0]
 		*closestContacts = (*closestContacts)[1:]
-		neet.SendFindDataMessage(hash, &c)
+		closestC, datafound := neet.SendFindDataMessage(hash, &c)
+		if datafound != nil {
+			return
+		}
+
+		result = &datafound
+
 	}
 	mutex.Unlock()
 }
 
 func (kademlia *Kademlia) LookupData(hash string, contact *Contact) string {
 	fmt.Println("Lookup data starting...")
+	var result []byte
 	var closestContacts Contacts = kademlia.RT.FindClosestContacts(contact.ID, alpha)
 	var mutex sync.Mutex
 	i, ok := kademlia.mapdemlia[hash]
 	if ok {
 		return i
 	}
-
 	var wg sync.WaitGroup
 
 	wg.Add(alpha)
 	for i := 0; i < alpha; i++ {
 		fmt.Println("Spawned new thread")
-		go kademlia.LookupDataThreads(hash, &closestContacts, &wg, &mutex)
+		go kademlia.LookupDataThreads(hash, &closestContacts, &wg, &mutex, &result)
 	}
 	wg.Wait()
 
 	for i := 0; i < len(closestContacts); i++ {
-
-		//if closestContacts[i]. == target.ID {
-		//p, ok := kademlia.mapdemlia[hash]
+		//		if closestContacts[i].ID == target.ID {
 		//fmt.Println(closestContacts[i])
-		//return &(closestContacts[i])
+		//	return &(closestContacts[i])
+		return ""
 	}
-	//}
 	return ""
 }
-
-//fmt.Println(target.ID.String())
-
-// for i := 0; i > (someHash); i++{
-//	if someHash == target.hash{ return someHash }
-//}väldigt lik LookupContactsl
 
 func (kademlia *Kademlia) Store(data []byte) {
 	hashedval := KademliaID(sha1.Sum(data))

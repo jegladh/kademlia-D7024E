@@ -18,7 +18,7 @@ type MockNetwork struct {
 }
 type neetwork interface {
 	SendFindContactMessage(contact *Contact, dest *Contact) []Contact
-	SendFindDataMessage(hash string, contact *Contact) (string, Contact)
+	SendFindDataMessage(hash string, contact *Contact) (*Contacts, []byte)
 	SendStoreMessage(data []byte)
 	//LookupContact()
 	//LookupContactThreads()
@@ -115,14 +115,20 @@ func (network *Network) SendFindContactMessage(contact *Contact, dest *Contact) 
 	//if success
 	//kademlia.LookupContact()
 }
-func (network *MockNetwork) SendFindDataMessage(hash string, contact *Contact) (string, Contact) {
-	var s string
-	fmt.Println(" I am sending DataMsg now")
-	for i := 0; i < 5; i++ {
-		newdata := NewContact(NewRandomKademliaID(), "localhost")
-		s = newdata.ID.String()
+func (network *MockNetwork) SendFindDataMessage(hash string, contact *Contact) (*Contacts, []byte) {
+	fmt.Println("I am sending DataMsg now")
+	if hash == "FFFF" && contact.ID.String() == "rwdfvwsv" {
+		return _, _
+
 	}
-	return s, NewContact(NewRandomKademliaID(), "localhost")
+
+	// var s []byte
+	// fmt.Println(" I am sending DataMsg now")
+	// for i := 0; i < 5; i++ {
+	// 	*newdata := NewContact(NewRandomKademliaID(), "localhost")
+	//
+	// }
+	// return &newdata, s
 
 }
 
